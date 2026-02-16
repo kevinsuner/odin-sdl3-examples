@@ -14,6 +14,7 @@ Example :: enum {
 	TexturedQuad,
 	UboQuad,
 	TexturedModel,
+	CameraControls,
 }
 
 main :: proc() {
@@ -29,7 +30,7 @@ main :: proc() {
 		log.fatalf("unable to initialize sdl, error: %s", sdl.GetError())
 	}
 
-	device := sdl.CreateGPUDevice({.SPIRV, .DXIL, .MSL}, false, nil) // Pass nil for sdl to auto select the correct device type (vulkan, metal, d12) 
+	device := sdl.CreateGPUDevice({.SPIRV, .DXIL, .MSL}, false, nil) // Pass nil for sdl to auto select the correct device type (vulkan, metal, d12)
 	if device == nil {
 		log.fatalf("unable to initialize gpu device, error: %s", sdl.GetError())
 	}
@@ -44,7 +45,7 @@ main :: proc() {
 	}
 
 	examples.init(window, device)
-	example_type := Example.TexturedModel
+	example_type := Example.CameraControls
 
 	switch example_type {
 	case .Clear:
@@ -65,6 +66,9 @@ main :: proc() {
 	case .TexturedModel:
 		examples.textured_model()
 		examples.destroy_textured_model()
+	case .CameraControls:
+		examples.camera_controls()
+		examples.destroy_camera_controls()
 	}
 }
 

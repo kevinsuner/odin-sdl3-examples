@@ -6,14 +6,14 @@ import "core:mem"
 import sdl "vendor:sdl3"
 import stbi "vendor:stb/image"
 
-textured_model :: proc() {
+camera_controls :: proc() {
 	vert_shader := load_shader(ctx.device, "model.vert", 0, 1, 0, 0)
 	assert(vert_shader != nil)
 
 	frag_shader := load_shader(ctx.device, "model.frag", 1, 0, 0, 0)
 	assert(frag_shader != nil)
 
-	model_data := obj_load("taxi.obj")
+	model_data := obj_load("ambulance.obj")
 	log.info(sdl.GPUTextureSupportsFormat(ctx.device, .D16_UNORM, .D2, {.DEPTH_STENCIL_TARGET}))
 
 	img_size: [2]i32
@@ -277,7 +277,7 @@ textured_model :: proc() {
 	}
 }
 
-destroy_textured_model :: proc() {
+destroy_camera_controls :: proc() {
 	if ctx.window != nil {
 		sdl.DestroyWindow(ctx.window)
 	}
