@@ -45,7 +45,7 @@ main :: proc() {
 	}
 
 	examples.init(window, device)
-	example_type := Example.CameraControls
+	example_type := Example.TexturedQuad
 
 	switch example_type {
 	case .Clear:

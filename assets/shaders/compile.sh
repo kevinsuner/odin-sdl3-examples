@@ -2,7 +2,7 @@
 for filename in *.vert.glsl; do
     if [ -f "$filename" ]; then
         glslang "$filename" -V -o "compiled/${filename/.glsl/.spv}"
-        shadercross "compiled/${filename/.glsl/.spv}" -s SPIRV -d MSL -o "compiled/${filename/.glsl/.msl}"
+        spirv-cross --msl "compiled/${filename/.glsl/.spv}" --output "compiled/${filename/.glsl/.msl}"
         # shadercross "$filename" -o "compiled/DXIL/${filename/.hlsl/.dxil}"
     fi
 done
@@ -10,7 +10,7 @@ done
 for filename in *.frag.glsl; do
     if [ -f "$filename" ]; then
         glslang "$filename" -V -o "compiled/${filename/.glsl/.spv}"
-        shadercross "compiled/${filename/.glsl/.spv}" -s SPIRV -d MSL -o "compiled/${filename/.glsl/.msl}"
+        spirv-cross --msl "compiled/${filename/.glsl/.spv}" --output "compiled/${filename/.glsl/.msl}"
         # shadercross "$filename" -o "compiled/DXIL/${filename/.hlsl/.dxil}"
     fi
 done
