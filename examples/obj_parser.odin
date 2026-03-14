@@ -23,7 +23,8 @@ ObjFaceIndex :: struct {
 }
 
 obj_load :: proc(filename: string) -> ObjData {
-	data, ok := os.read_entire_file_from_filename(fmt.tprintf("assets/models/%s", filename));assert(ok)
+	data, err := os.read_entire_file_from_path(fmt.tprintf("assets/models/%s", filename), context.allocator)
+	assert(err != nil)
 	defer delete(data)
 
 	input_string := string(data)
